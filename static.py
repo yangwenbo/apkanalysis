@@ -3,10 +3,12 @@
 import os
 import sys
 import hashlib
+import exported_components
 sys.path.append("..")
 from androguard.core.bytecodes import apk
 from androguard.core.bytecodes import dvm
 from androguard.core.analysis import analysis
+
 import chilkat
 import re
 
@@ -53,6 +55,14 @@ def cal_filesize(f):
 		unit = 'MB'
 	return str(size) + ' ' + unit
 
+def fillComponetName(p, c):
+	'''
+	if a component name begin with '.', it means to omit the package name
+	'''
+	if c[0] == '.':
+		c = p + c
+	return c
+
 
 def parse_APK(APKFile):
 	'''
@@ -86,6 +96,8 @@ def basic_information(a, d, dx):
 
 def security_information(a, d, dx):
 	permissions = a.get_permissions()
+	pn = a.get_package()
+	exported_comp = exported_components.find_exported_components(a)
 
 
 	OutStream.write("===========APK SECURITY PROBLEM===============\n")
@@ -95,6 +107,19 @@ def security_information(a, d, dx):
 	else:
 		for p in permissions:
 			OutStream.write(p + '\n')
+	OutStream.write("***exported components***\n")
+	OutStream.write("Activity:\n")
+	for item in exported_comp.activity:
+		OutStream.write(fillComponetName(pn,item) + '\n')
+	OutStream.write("Service:\n")
+	for item in exported_comp.service:
+		OutStream.write(fillComponetName(pn,item) + '\n')
+	OutStream.write("Receiver:\n")
+	for item in exported_comp.receiver:
+		OutStream.write(fillComponetName(pn,item) + '\n')
+	OutStream.write("Provider:\n")
+	for item in exported_comp.provider:
+		OutStream.write(fillComponetName(pn,item) + '\n')
 
 def static_analysis(APKFile):
 	a, d, dx = parse_APK(APKFile)
