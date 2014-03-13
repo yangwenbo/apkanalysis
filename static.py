@@ -97,6 +97,14 @@ def basic_information(a, d, dx):
 def security_information(a, d, dx):
 	permissions = a.get_permissions()
 	pn = a.get_package()
+	'''
+	#if either targetSDK or miniSDK is 16 or lower 
+	tarSDK = a.get_target_sdk_version()
+	minSDK = a.get_min_sdk_version()
+	providerDefaultExported = False
+	if tarSDK <= 16 or minSDK <= 16:
+		providerDefaultExported = True
+	'''
 	exported_comp = exported_components.find_exported_components(a)
 
 
@@ -110,16 +118,23 @@ def security_information(a, d, dx):
 	OutStream.write("***exported components***\n")
 	OutStream.write("Activity:\n")
 	for item in exported_comp.activity:
-		OutStream.write(fillComponetName(pn,item) + '\n')
+		OutStream.write(fillComponetName(pn,item[0]) + '\n')
+		OutStream.write(item[1] + '\n')
 	OutStream.write("Service:\n")
 	for item in exported_comp.service:
-		OutStream.write(fillComponetName(pn,item) + '\n')
+		OutStream.write(fillComponetName(pn,item[0]) + '\n')
+		OutStream.write(item[1] + '\n')
 	OutStream.write("Receiver:\n")
 	for item in exported_comp.receiver:
-		OutStream.write(fillComponetName(pn,item) + '\n')
+		OutStream.write(fillComponetName(pn,item[0]) + '\n')
+		OutStream.write(item[1] + '\n')
 	OutStream.write("Provider:\n")
 	for item in exported_comp.provider:
-		OutStream.write(fillComponetName(pn,item) + '\n')
+		OutStream.write(fillComponetName(pn,item[0]) + '\n')
+		OutStream.write(item[1] + '\n')
+		OutStream.write(item[2] + '\n')
+
+
 
 def static_analysis(APKFile):
 	a, d, dx = parse_APK(APKFile)
