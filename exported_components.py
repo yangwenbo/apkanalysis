@@ -34,21 +34,21 @@ class ManifestHandler(ContentHandler):
                 if attrs["android:exported"] == "true":
                     if attrs.has_key("android:permission"):
                         self.permission_r = attrs["android:permission"]
+                        self.permission_w = attrs["android:permission"]
                     if attrs.has_key("android:readPermission"):
                         self.permission_r = attrs["android:readPermission"]
                     if attrs.has_key("android:writePermission"):
-                        self.permission_w = attrs["android:writePermission"]
-                        
+                        self.permission_w = attrs["android:writePermission"]   
                     self.provider.append([attrs["android:name"],self.permission_r,self.permission_w])
             else:
                 if self.provider_default == True:
                     if attrs.has_key("android:permission"):
                         self.permission_r = attrs["android:permission"]
+                        self.permission_w = attrs["android:permission"]
                     if attrs.has_key("android:readPermission"):
                         self.permission_r = attrs["android:readPermission"]
                     if attrs.has_key("android:writePermission"):
-                        self.permission_w = attrs["android:writePermission"]
-                        
+                        self.permission_w = attrs["android:writePermission"]   
                     self.provider.append([attrs["android:name"],self.permission_r,self.permission_w])
 
 
@@ -78,7 +78,7 @@ class ManifestHandler(ContentHandler):
                 self.permission_r = attrs["android:permission"]
             if attrs.has_key("android:exported"):
                 if attrs["android:exported"] == "true":
-                    self.activity.append(attrs["android:name"])
+                    self.activity.append([attrs["android:name"],self.permission_r])
             else:
                 self.is_in_activity = True
                 self.component_name = attrs["android:name"]
@@ -122,6 +122,7 @@ class ManifestHandler(ContentHandler):
                 self.permission_r = "null"
 
         if name == "provider":
+            self.component_name_added = False
             self.permission_r = "null"
             self.permission_w = "null"
 
