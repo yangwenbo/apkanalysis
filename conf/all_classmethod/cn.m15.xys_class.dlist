@@ -1,0 +1,14 @@
+Landroid/annotation/SuppressLint;
+Landroid/annotation/TargetApi;
+Lcn/m15/xys/BuildConfig;
+Lcn/m15/xys/R$attr;
+Lcn/m15/xys/R$drawable;
+Lcn/m15/xys/R$id;
+Lcn/m15/xys/R$layout;
+Lcn/m15/xys/R$string;
+Lcn/m15/xys/R;
+Lloccs/diaos/test_activity/ContactsActivity;
+Lloccs/diaos/test_activity/Menu$1;
+Lloccs/diaos/test_activity/Menu$2;
+Lloccs/diaos/test_activity/Menu;
+Lloccs/diaos/test_activity/SmsActivity;

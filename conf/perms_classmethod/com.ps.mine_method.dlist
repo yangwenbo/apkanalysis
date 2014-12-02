@@ -1,0 +1,11 @@
+Ljava/net/Socket;<init>
+Ljava/net/URL;openConnection
+Landroid/telephony/TelephonyManager;getLine1Number
+Landroid/telephony/TelephonyManager;getDeviceId
+Lorg/apache/http/impl/client/DefaultHttpClient;<init>
+Landroid/telephony/TelephonyManager;getSubscriberId
+Landroid/telephony/TelephonyManager;getCellLocation
+Ljava/net/HttpURLConnection;connect
+Landroid/telephony/TelephonyManager;getSimSerialNumber
+Landroid/webkit/WebView;<init>
+Lorg/apache/http/impl/client/DefaultHttpClient;execute

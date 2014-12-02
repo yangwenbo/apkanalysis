@@ -1,0 +1,9 @@
+Lcom/swapTest/R$attr;<init>
+Lcom/swapTest/R$drawable;<init>
+Lcom/swapTest/R$id;<init>
+Lcom/swapTest/R$layout;<init>
+Lcom/swapTest/R$string;<init>
+Lcom/swapTest/R;<init>
+Lcom/swapTest/SwapTestActivity;<init>
+Lcom/swapTest/SwapTestActivity;onCreate
+Lcom/swapTest/SwapTestActivity;swap

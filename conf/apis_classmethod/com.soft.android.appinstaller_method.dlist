@@ -1,0 +1,4 @@
+Landroid/telephony/SmsManager;getDefault
+Lorg/apache/http/impl/client/DefaultHttpClient;<init>
+Lorg/apache/http/impl/client/DefaultHttpClient;execute
+Landroid/telephony/SmsManager;sendTextMessage
