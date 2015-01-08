@@ -244,6 +244,10 @@ def print_crypto(dx, cm):
 	else:
 		OutStream.write("False\n")
 		
+def print_specific_method(dx, cm, class_name, method_name):
+	paths = dx.get_tainted_packages().search_methods( class_name, method_name, ".")
+	if len(paths) > 0:
+		write_Paths(paths, cm, sys.stdout)
 
 
 def security_information(a, d, dx):
