@@ -32,7 +32,7 @@ def access_classes(dex, classNameFilter):
 
 def access_class(dex, class_name):
 	c = dex.get_class(class_name)
-	print c.show()
+	c.show()
 
 	# get fields
 	fields = c.get_fields()
@@ -92,6 +92,33 @@ def print_specific_method(dex, class_name, method_name):
 	import static
 	static.print_specific_method(dx, cm, class_name, method_name)
 
+def whole_dexdump(dex):
+	access_dex_header(dex)
+	print "\n"
+	classlist = dex.get_classes()
+	for each_class in classlist:
+		each_class.show()
+		print
+
+		fields = each_class.get_fields()
+		print "********fields number: %d" %len(fields)
+		for each_field in fields:
+			each_field.pretty_show()
+			print
+
+		print 
+
+		methods = each_class.get_methods()
+		print "********methods number: %d" %len(methods)
+		for each_method in methods:
+			each_method.pretty_show()
+			print 
+
+	print "\n\n\n"
+		
+
+		
+
 
 
 isAPK = True
@@ -124,15 +151,17 @@ else:
 	*/
 	print_specific_method(dex, class_name, method_name)
 
+	whole_dexdump(dex)
+
 
 '''
 
 ClassNameFilter = "^(?!Landroid/support)"
 ClassNameFilter = ".*"
-ClassNameFilter = "^(Lcom/Mo)"
+
 MethodNameFilter = "^(?!Landroid/support)"
 
-ClassName = "Lcom/phonegap/plugins/childBrowser/ChildBrowser$6;"
+ClassName = "Lcom/example/test/MainActivity;"
 MethodName = "run"
 
 #access_dex_header(dex)
@@ -147,7 +176,7 @@ MethodName = "run"
 #access_methods_class(dex, ClassName)
 
 #print_specific_method(dex, "Landroid/webkit/WebView;", "addJavascriptInterface")
-
+whole_dexdump(dex)
 
 
 
