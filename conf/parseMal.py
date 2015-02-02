@@ -40,7 +40,6 @@ def behave(n):
 	if n.find("content://sms") != -1:
 		result.append("SMS")
 	elif n.find("content://com.android.calendar")!=-1:
-		print n
 		result.append("CALENDAR")
 	elif n.find("content://com.android.contacts") != -1:
 		result.append("CONTACTS")
@@ -84,13 +83,9 @@ def initStatic(APKFile):
 
 def readDyn(path):
 	pa = path + "/parseRes"
-	print pa
 	for filename in os.listdir(pa):
-		print filename
 		if filename.startswith("func"):
-			print filename
 			f = open(pa+"/"+filename,"r")
-			print f
 			a = f.readlines()
 			a.append("==end==")
 			x = iter(a)
