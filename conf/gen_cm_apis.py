@@ -38,7 +38,7 @@ def write_Paths(Paths, cm) :
         
 def write_Class_Path(p, cm):
 	if isinstance(p, analysis.PathVar):
-		pass
+		sClass.add(p.get_dst(cm)[0])
 	else:
 		sClass.add(p.get_src(cm)[0])
 

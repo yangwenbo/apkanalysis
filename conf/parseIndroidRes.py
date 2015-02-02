@@ -26,7 +26,7 @@ def trans(infile,outfile):
 	for l in allLines:
 		if re.match(PATTER1,l) or re.match(PATTER2,l) or re.match(PATTER3,l) or re.match(PATTER4,l):
 			flag = False
-			wf.write(l.encode('utf-16'))
+			wf.write(l.encode('utf-8'))
 			if STRTYPE in l:
 				flag = True
 		else:
@@ -35,17 +35,19 @@ def trans(infile,outfile):
 					l = l[1:]
 				if l[-1] == '\x0a':
 					l = l[:-1] + '\n'.encode('utf-16')
-				wf.write(l)
+				wf.write(l.decode('utf-16').encode('utf-8'))
 				#if re.match(INTERESTING, l):
 				#	s.add(l)
 			else:
 				#if re.match(INTERESTING, l):
 				#	s.add(l.encode('utf-16'))
-				wf.write(l.encode('utf-16'))
+				wf.write(l.encode('utf-8'))
 	#for si in s:
 	#	wf.write(si)
 	rf.close()
 	wf.close()
+
+
 i = 0
 strpath = path+"/parseRes"
 if not os.path.exists(strpath):

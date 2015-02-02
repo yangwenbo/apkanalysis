@@ -4,7 +4,7 @@ import os
 import sys
 import subprocess
 import hashlib
-sys.path.append("/home/tstcadmin/Documents/androguard")
+sys.path.append("/home/dev/tools/androguard")
 from androguard.core.bytecodes import apk
 from androguard.core.bytecodes import dvm
 from androguard.core.analysis import analysis
@@ -29,4 +29,8 @@ if __name__ == '__main__':
 	if not os.path.exists(dataDir):
 		os.makedirs(dataDir)
 	os.popen(adbPath + "pull /data/data/"+p + " " + dataDir)
-	os.popen("./parseIndroidRes.py "+dataDir)
+	subprocess.call(["./parseIndroidRes.py",dataDir])
+	subprocess.call(["./parseMal.py",APKFile,dataDir])
+	#x = os.popen("./parseIndroidRes.py "+dataDir)
+	#print type(x)
+	#os.popen("./parseMal.py "+APKFile+" "+dataDir)

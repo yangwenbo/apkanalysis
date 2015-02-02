@@ -3,7 +3,7 @@ import subprocess
 import sys
 import os
 import conf
-sys.path.append("/home/tstcadmin/Documents/androguard/")
+sys.path.append("/home/dev/tools/androguard/")
 from androguard.core.bytecodes import apk
 
 adbPath = conf.adbPath 

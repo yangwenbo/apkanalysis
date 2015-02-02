@@ -8,7 +8,7 @@ opt = sys.argv[1]
 APKFile = sys.argv[2]
 package = sys.argv[3]
 '''
-perms,apis,all,def
+perms,apis,all,def,mal
 '''
 
 #os.chdir("./config")

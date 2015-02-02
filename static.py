@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+#-*-coding:utf-8 -*-
 import os
 import sys
 import hashlib
@@ -9,6 +9,7 @@ sys.path.append("..")
 from androguard.core.bytecodes import apk
 from androguard.core.bytecodes import dvm
 from androguard.core.analysis import analysis
+from androguard.core.bytecodes.api_permissions import DVM_PERMISSIONS_BY_PERMISSION, DVM_PERMISSIONS_BY_ELEMENT
 
 import chilkat
 import re
@@ -119,6 +120,37 @@ def write_Path(p, cm, wf):
         #else:
 		#	pass
 
+def write_Path2(path, cm, wf):
+	if isinstance(path, analysis.PathVar):
+		dst_class_name, dst_method_name, dst_descriptor =  path.get_dst( cm )
+		info_var = path.get_var_info()
+		wf.write("%s %s (0x%x) ---> %s->%s%s\n" % (path.get_access_flag(),
+											  info_var,
+											  path.get_idx(),
+											  dst_class_name,
+											  dst_method_name,
+											  dst_descriptor) )
+	else :
+		if path.get_access_flag() == analysis.TAINTED_PACKAGE_CALL :
+			src_class_name, src_method_name, src_descriptor =  path.get_src( cm )
+			dst_class_name, dst_method_name, dst_descriptor =  path.get_dst( cm )
+
+			wf.write("%d %s->%s%s (0x%x) ---> %s->%s%s\n" % (path.get_access_flag(), 
+														src_class_name,
+														src_method_name,
+														src_descriptor,
+														path.get_idx(),
+														dst_class_name,
+														dst_method_name,
+														dst_descriptor) )
+		else :
+			src_class_name, src_method_name, src_descriptor =  path.get_src( cm )
+			wf.write("%d %s->%s%s (0x%x)\n" % (path.get_access_flag(), 
+										  src_class_name,
+										  src_method_name,
+										  src_descriptor,
+										  path.get_idx()) )
+
 
 def write_Paths(Paths, cm, wf) :
     for p in Paths:
@@ -207,6 +239,7 @@ def print_specialAPI(dx):
 	print_reflection(dx,cm)
 	print_JSExecute(dx, cm)
 	print_crypto(dx, cm)
+	print_perm_API(dx, cm)
 
 def print_sensitive_str(d):
 	OutStream.write("***interesting strings***\n")
@@ -248,6 +281,14 @@ def print_specific_method(dx, cm, class_name, method_name):
 	paths = dx.get_tainted_packages().search_methods( class_name, method_name, ".")
 	if len(paths) > 0:
 		write_Paths(paths, cm, sys.stdout)
+
+def print_perm_API(dx, cm):
+	p = dx.get_permissions( [] )
+
+	for i in p :
+		OutStream.write(i+":\n")
+		for j in p[i] :
+			write_Path2(j, cm, OutStream)
 
 
 def security_information(a, d, dx):
