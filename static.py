@@ -284,6 +284,8 @@ def print_specific_method(dx, cm, class_name, method_name):
 
 def print_perm_API(dx, cm):
 	p = dx.get_permissions( [] )
+	if len(p) > 0:
+		OutStream.write("***sensitive behavior***\n")
 
 	for i in p :
 		OutStream.write(i+":\n")
