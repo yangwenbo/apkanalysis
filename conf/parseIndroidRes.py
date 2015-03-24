@@ -47,7 +47,7 @@ def trans(infile,outfile):
 	rf.close()
 	wf.close()
 
-'''
+
 i = 0
 strpath = path+"/parseRes"
 if not os.path.exists(strpath):
@@ -62,6 +62,6 @@ for filename in os.listdir(path):
 	if re.match(FUNCBIN,filename):
 		trans(path+"/"+filename, strpath+"/func"+str(j))
 		j = j + 1
-'''
 
-trans(path,"xxxxx")
+
+#trans(path,"xxxxx")

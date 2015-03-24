@@ -4,7 +4,7 @@ import os
 import sys
 import subprocess
 import hashlib
-sys.path.append("/home/dev/tools/androguard")
+sys.path.append("/home/ywb/tools/androguard")
 from androguard.core.bytecodes import apk
 from androguard.core.bytecodes import dvm
 from androguard.core.analysis import analysis

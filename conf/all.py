@@ -24,3 +24,12 @@ p = a.get_package()
 os.popen("./indroidconf.py " + option + " " + APKFile + " "+ p)
 ma = a.get_main_activity()
 os.popen(adbPath + "shell am start "+p+"/"+ma)
+os.popen(adbPath + "shell monkey -p " + p + "  -s 500 --monitor-native-crashes -v -v -v 1000")
+if len(sys.argv) == 3:
+	path = sys.argv[2]
+	os.popen("./pullfile.py "+APKFile+" "+path)
+	os.popen("zip -r download.zip "+path)
+else:
+	os.popen("./pullfile.py "+APKFile)
+os.popen(adbPath + "uninstall " + p)
+

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-adbPath = "adb -s "
+adbPath = "adb "
 autoconf = "mal"
 '''
 all,def,apis,perms,mal

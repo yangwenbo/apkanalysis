@@ -2,7 +2,7 @@
 
 import binascii
 import re, os, sys
-sys.path.append("/home/dev/tools/androguard/")
+sys.path.append("/home/ywb/tools/androguard/")
 from androguard.core.bytecodes import apk
 from androguard.core.bytecodes import dvm
 from androguard.core.analysis import analysis
@@ -112,8 +112,18 @@ def readDyn(path):
 			f.close()
 
 
+def writeRes(result,path):
+	fn = path+"/parseRes/behavior"
+	with open(fn,'w') as d:
+		for r in result:
+			d.write(r+"\n")
+
+	
+
+
 initStatic(APKFile)
 #print permap
 #readDyn("/home/dev/tools/androguard/tstc/dynam_out/0b982427125d5d1a4d6db07afa2c2c1c/data")
 readDyn(path)
+writeRes(result,path)
 print result
